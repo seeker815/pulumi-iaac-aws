@@ -1,0 +1,3 @@
+name: vpc-go
+runtime: go
+description: Setup VPC for AWS EKS
