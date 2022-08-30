@@ -18,6 +18,9 @@ func main() {
 		vpc, err := ec2.NewVpc(ctx, vpcName, &ec2.VpcArgs{
 			CidrBlock:          pulumi.String("10.0.0.0/16"),
 			EnableDnsHostnames: pulumi.BoolPtr(true),
+			Tags: pulumi.StringMap{
+				"Name": pulumi.String("sandbox-dune-vpc"),
+			},
 		})
 		if err != nil {
 			return err
@@ -35,6 +38,7 @@ func main() {
 				},
 			},
 				pulumi.DependsOn([]pulumi.Resource{vpc}),
+				pulumi.DeleteBeforeReplace(true),
 			)
 			subCount++
 			if err != nil {
