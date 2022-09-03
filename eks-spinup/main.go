@@ -125,14 +125,14 @@ func main() {
 			return err
 		}
 
-		nodeGroup, err := eks.NewNodeGroup(ctx, "node-group-2", &eks.NodeGroupArgs{
+		nodeGroup, err := eks.NewNodeGroup(ctx, "sandbox-ng-1", &eks.NodeGroupArgs{
 			ClusterName:   eksCluster.Name,
-			NodeGroupName: pulumi.String("demo-eks-nodegroup-2"),
+			NodeGroupName: pulumi.String("sandbox-eks-ng-1"),
 			NodeRoleArn:   pulumi.StringInput(nodeGroupRole.Arn),
 			SubnetIds:     toPulumiStringArray(subnet.Ids),
 			ScalingConfig: &eks.NodeGroupScalingConfigArgs{
-				DesiredSize: pulumi.Int(2),
-				MaxSize:     pulumi.Int(2),
+				DesiredSize: pulumi.Int(3),
+				MaxSize:     pulumi.Int(5),
 				MinSize:     pulumi.Int(1),
 			},
 		})
